@@ -1,4 +1,4 @@
-# Inside the Agent Runtime
+# Inside the Agent Runtime (အေးဂျင့်တစ်ခုရဲ့ အတွင်းပိုင်းကို နားလည်ခြင်း)
 
 ### AI Agent တစ်ခု ဘယ်လိုစဉ်းစားသလဲ 
 ### Pi Loop မှ Hermes Compaction အထိ 
