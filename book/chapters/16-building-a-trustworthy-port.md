@@ -29,8 +29,8 @@ Fake Model contract က response fixture တစ်ခုပဲမဟုတ်ပ
 သူတို့ရဲ့ executable assertions ကို [`tests/test_minimal_runtime.py`](../../tests/test_minimal_runtime.py) နဲ့ [`tests/test_lewis_workshop.py`](../../tests/test_lewis_workshop.py) မှာထားပါတယ်။ Workshop တစ်ခုလုံးကို repository root ကနေ ဒီ command နဲ့ run နိုင်ပါတယ်။
 
 ```bash
-python3 -m unittest tests.test_minimal_runtime tests.test_lewis_workshop -v
-python3 scripts/check_book.py
+python3.13 -m unittest tests.test_minimal_runtime tests.test_lewis_workshop -v
+python3.13 scripts/check_book.py
 ```
 
 ပထမ command က local offline teaching tests ကို run ပြီး ဒုတိယ command က manuscript structure နဲ့ links လို book rules ကိုစစ်ပါတယ်။ နှစ်ခုလုံးအောင်ရင် artifacts ငါးခုရဲ့ သတ်မှတ်ထားတဲ့ assertions နဲ့ စာအုပ် checks အောင်တယ်လို့ပဲ ပြောနိုင်ပါတယ်။ ဒီ local book tests က full Travis234 suite ကိုမခေါ်သလို Pi/Hermes parity အားလုံးကိုလည်း မသက်သေပြပါဘူး။

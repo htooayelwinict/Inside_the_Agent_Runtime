@@ -44,7 +44,13 @@ async def run_agent_loop(
     max_iterations: int = 8,
     max_parallel_tools: int = 4,
 ) -> list[RuntimeEvent]:
-    """Run a bounded educational model/tool loop and return its event trace."""
+    """Run a bounded educational model/tool loop and return its event trace.
+
+    ``max_parallel_tools`` must be greater than zero.
+    """
+
+    if max_parallel_tools <= 0:
+        raise ValueError("max_parallel_tools must be greater than zero")
 
     messages: list[dict[str, object]] = [
         {"role": "user", "content": user_input},

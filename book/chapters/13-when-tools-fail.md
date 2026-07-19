@@ -99,7 +99,7 @@ def execute_tool_call(
 `ToolOutcome` မှာ `phase`, `reason`, `content`, `after_hook_called` fields ပါပါတယ်။ Repository root ကနေ default demo ကို run ပါ။
 
 ```bash
-python3 examples/lewis_tool_outcomes.py
+python3.13 examples/lewis_tool_outcomes.py
 ```
 
 လက်ရှိ output သုံးကြောင်းအတိအကျက:

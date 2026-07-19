@@ -16,12 +16,14 @@ from examples.lewis_tool_outcomes import execute_tool_call
 
 
 class MessageControlTests(unittest.TestCase):
-    def test_steering_precedes_turn_end_and_follow_up_starts_after_it(self) -> None:
+    def test_steering_follows_turn_end_and_precedes_next_model_call(self) -> None:
         self.assertEqual(
             simulate_message_control(),
             (
                 "model:inspect source",
+                "turn_end",
                 "steering:check tests first",
+                "model:continue with steering",
                 "turn_end",
                 "follow_up:run focused test",
             ),
@@ -164,6 +166,35 @@ class SessionRestoreTests(unittest.TestCase):
                 "message:Latest retained tail",
                 "message:Later message",
             ),
+        )
+
+    def test_missing_first_kept_anchor_is_rejected(self) -> None:
+        entries = (
+            SessionEntry("m1", "message", content="Original goal"),
+            SessionEntry(
+                "c1",
+                "compaction",
+                summary="Summary",
+                first_kept_entry_id="missing",
+            ),
+        )
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "^first kept entry not found: missing$",
+        ):
+            restore_context(entries)
+
+    def test_compaction_without_anchor_restores_no_pre_compaction_tail(self) -> None:
+        entries = (
+            SessionEntry("m1", "message", content="Pruned history"),
+            SessionEntry("c1", "compaction", summary="Summary"),
+            SessionEntry("m2", "message", content="Later message"),
+        )
+
+        self.assertEqual(
+            restore_context(entries),
+            ("summary:Summary", "message:Later message"),
         )
 
 

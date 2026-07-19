@@ -51,10 +51,10 @@ Claim တစ်ခုမှ evidence မလုံလောက်လို့ ဖ
 
 | Command | Result |
 |---|---|
-| `python3 -m py_compile` on checker၊ examples ငါးခုနဲ့ test modules သုံးခု | passed |
+| `python3.13 -m py_compile` on checker၊ examples ငါးခုနဲ့ test modules သုံးခု | passed |
 | Offline demo commands ငါးခု | all exited 0; expected teaching outputs produced |
-| `python3 -m unittest discover -s tests -v` | 21 tests passed |
-| `python3 scripts/check_book.py` | links၊ placeholders နဲ့ exact Chapter 00–16 filename/H1 sequence passed |
+| `python3.13 -m unittest discover -s tests -v` | 24 tests passed |
+| `python3.13 scripts/check_book.py` | links၊ placeholders နဲ့ exact Chapter 00–16 filename/H1 sequence passed |
 | Chapter navigation audit | reciprocal 00 → 16 → Appendix A chain passed |
 | `git diff --check` | passed |
 | Travis234: `python3 scripts/verify_acceptance.py --parity-json` | exited 0; Pi 74 parity / 4 divergence, Hermes 11 parity / 0 divergence |
@@ -95,7 +95,7 @@ Reciprocal navigation audit က 00 → 01 → 02 → 03 → … → 16 → Appen
 
 ### Numbering checker and prose lock
 
-`scripts/check_book.py` က filename/H1 mismatch၊ duplicate number၊ missing number နဲ့ unexpected number ကိုစစ်ပြီး exact 00–16 sequence ကိုသတ်မှတ်ထားပါတယ်။ `tests/test_check_book.py` ရဲ့ valid၊ mismatch၊ duplicate နဲ့ missing cases အပါအဝင် full local suite 21 tests အောင်ပါတယ်။
+`scripts/check_book.py` က filename/H1 mismatch၊ duplicate number၊ missing number နဲ့ unexpected number ကိုစစ်ပြီး exact 00–16 sequence ကိုသတ်မှတ်ထားပါတယ်။ `tests/test_check_book.py` ရဲ့ valid၊ mismatch၊ duplicate နဲ့ missing cases အပါအဝင် full local suite 24 tests အောင်ပါတယ်။
 
 Base `0d554e1` ကနေ Git rename audit လုပ်ရာမှာ existing Chapter 03–15 files 13 ခုလုံးကို 93–97% similarity နဲ့ renames အဖြစ်သိပါတယ်။ Existing body wording၊ examples၊ code/output blocks နဲ့ claims ကိုမပြင်ဘဲ H1/H2 numbers၊ navigation၊ renamed-link targets နဲ့ current-edition chapter references ကိုသာပြောင်းထားတယ်။ Final Chapter 05–16 word counts က previous edition နဲ့တူပြီး Chapter 04 က exact Chapter 03 title ပါတဲ့ Previous label ကြောင့် 1,100 ကနေ 1,101 words ဖြစ်လာတာသာရှိပါတယ်။
 
@@ -111,7 +111,7 @@ Chapter 11–16 style scan မှာ prohibited/unnatural phrase စာရင်
 
 | Claim | Status | Fresh review note |
 |---|---|---|
-| C-MESSAGE-DRAIN | verified | steering inner-loop drain နဲ့ post-turn follow-up outer-loop drain boundary ကို Chapter 12 source notes နဲ့ workshop test က ပြန်ထောက်ခံတယ်။ |
+| C-MESSAGE-DRAIN | corrected | Workshop trace ကို `turn_end` → steering drain → next model call အစီအစဉ်နဲ့ညှိပြီး၊ completed steered turn နောက်မှ follow-up ဝင်ကြောင်း focused test နဲ့စစ်ထားတယ်။ |
 | C-ABORT-OWNERSHIP | verified | cooperative abort၊ active owner wait နဲ့ idempotent release boundary ကို Chapter 12 evidence နဲ့ပြန်တိုက်စစ်တယ်။ |
 | C-HOOK-BOUNDARY | verified | immediate unknown/invalid outcomes က after hook ကိုကျော်ပြီး invoked success/failure က တစ်ကြိမ်ခေါ်တဲ့ boundary ကို Chapter 13 demo/tests နဲ့စစ်တယ်။ |
 | C-SESSION-RESTORE | verified | latest summary၊ retained tail နဲ့ later entries က active context ပြန်တည်ဆောက်တဲ့ boundary ကို Chapter 14 evidence နဲ့စစ်တယ်။ |
@@ -120,9 +120,9 @@ Chapter 11–16 style scan မှာ prohibited/unnatural phrase စာရင်
 
 ### Fresh local and upstream evidence
 
-Local compile check က `examples/minimal_runtime.py`, `examples/lewis_message_control.py`, `examples/lewis_tool_outcomes.py`, `examples/lewis_session_restore.py`, `examples/lewis_trace_reader.py`, `tests/test_minimal_runtime.py` နဲ့ `tests/test_lewis_workshop.py` အတွက် exit 0 ဖြစ်တယ်။ ဒီ demo commands ငါးခု—`python3 examples/minimal_runtime.py`, `python3 examples/lewis_message_control.py`, `python3 examples/lewis_tool_outcomes.py`, `python3 examples/lewis_session_restore.py`, `python3 examples/lewis_trace_reader.py`—အားလုံး exit 0 ဖြစ်တယ်။
+Local compile check က `examples/minimal_runtime.py`, `examples/lewis_message_control.py`, `examples/lewis_tool_outcomes.py`, `examples/lewis_session_restore.py`, `examples/lewis_trace_reader.py`, `tests/test_minimal_runtime.py` နဲ့ `tests/test_lewis_workshop.py` အတွက် Python 3.13 နဲ့ exit 0 ဖြစ်တယ်။ ဒီ demo commands ငါးခု—`python3.13 examples/minimal_runtime.py`, `python3.13 examples/lewis_message_control.py`, `python3.13 examples/lewis_tool_outcomes.py`, `python3.13 examples/lewis_session_restore.py`, `python3.13 examples/lewis_trace_reader.py`—အားလုံး exit 0 ဖြစ်တယ်။
 
-`python3 -m unittest discover -s tests -v` က 21 tests passed လို့ report လုပ်တယ်။ `python3 scripts/check_book.py` က `book checks passed` လို့ပြီးပြီး `git diff --check` က output မရှိဘဲ exit 0 ဖြစ်တယ်။
+`python3.13 -m unittest discover -s tests -v` က 24 tests passed လို့ report လုပ်တယ်။ ဒီ suite မှာ steering ကို `turn_end` နောက် drain လုပ်ခြင်း၊ missing/no-tail Compaction anchors နဲ့ non-positive parallel-tool limit ကိုပါစစ်ထားတယ်။ `python3.13 scripts/check_book.py` က `book checks passed` လို့ပြီးပြီး `git diff --check` က output မရှိဘဲ exit 0 ဖြစ်တယ်။
 
 Pinned Travis234 revision `68b1831691b8ec93f9550ce63b80cdcb7a591b2e` မှာ `python3 scripts/verify_acceptance.py --parity-json` ကို ဒီ companion pass အတွက် ပြန်ပြေးပြီး Pi 74 parity / 4 divergence နဲ့ Hermes 11 parity / 0 divergence ရတယ်။ Travis234 npm launcher tests ရဲ့ 2026-07-18 result က အရင် review မှာ မှတ်တမ်းတင်ထားတဲ့ evidence ဖြစ်ပြီး ဒီ pass မှာ မပြန်ပြေးထားပါဘူး။ Parity verifier result ကိုလည်း Travis234 full suite run လို့ မဖော်ပြပါ။
 

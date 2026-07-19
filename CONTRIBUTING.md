@@ -36,6 +36,6 @@ Runtime behavior နဲ့ပတ်သက်တဲ့ correction တစ်ခု
 5. Source-backed change ဆိုရင် source ID သို့မဟုတ် URL ထည့်ပါ။
 
 ```bash
-python3 -m unittest discover -s tests -v
-python3 scripts/check_book.py
+python3.13 -m unittest discover -s tests -v
+python3.13 scripts/check_book.py
 ```

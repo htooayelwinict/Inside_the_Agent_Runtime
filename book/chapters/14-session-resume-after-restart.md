@@ -66,6 +66,8 @@ Restore လုပ်ချိန်မှာ active branch ထဲက `latest Com
 
 Compaction မရှိသေးတဲ့ branch ဆိုရင် summary anchor မလိုပါဘူး။ Context အဖြစ်ပြောင်းနိုင်တဲ့ branch messages တွေကို အစီအစဉ်အတိုင်း ပြန်တည်ဆောက်နိုင်ပါတယ်။ တစ်ဖက်မှာ anchor မှားနေခြင်းကို မသိဘဲကျော်သွားမယ်ဆိုရင် လတ်တလော causal turn ပျောက်နိုင်လို့ persistence writer နဲ့ restore tests က boundary တူကြောင်း စစ်ရပါတယ်။
 
+Compaction ရှိပေမယ့် `firstKeptEntryId` မရှိရင် retained raw tail မရှိဘူးလို့ lab က အဓိပ္ပာယ်သတ်မှတ်ပါတယ်။ ID တစ်ခုပါပြီး Compaction မတိုင်ခင် entries ထဲရှာမတွေ့ရင်တော့ corrupted boundary ကိုတိတ်တဆိတ်ကျော်မသွားဘဲ `ValueError` ထုတ်ပါတယ်။ ဒီလိုခွဲထားမှ anchor မရှိခြင်းနဲ့ anchor မှားခြင်းကို မရောဘဲ pruned history ပြန်ပေါ်လာတာ သို့မဟုတ် retained tail ပျောက်တာကိုကာကွယ်နိုင်ပါတယ်။
+
 ## ၁၄.၆ Restart ပြီး Active Context ပြန်ရခြင်း
 
 နောက်နေ့ process က model ဆီ “မနေ့ကဘာလုပ်ခဲ့သလဲ” လို့ မေးပြီး context ကိုခန့်မှန်းခိုင်းတာ မဟုတ်ပါဘူး။ Restart restoration ရဲ့ flow ကို component တာဝန်နဲ့ခွဲကြည့်ရင် ဒီလိုဖြစ်ပါတယ်။
@@ -88,7 +90,7 @@ Restore အောင်မြင်မှုကို file ဖွင့်နိ
 ဒီ reconstruction ကို API key မလိုဘဲစမ်းချင်ရင် [`examples/lewis_session_restore.py`](../../examples/lewis_session_restore.py) ကို repository root ကနေ run နိုင်ပါတယ်။ Lab က `SessionEntry`, `save_entries()`, `load_entries()` နဲ့ `restore_context()` ဆိုတဲ့ သေးငယ်တဲ့ teaching API ကိုသုံးပါတယ်။ ဖြေချင်တဲ့မေးခွန်းက temporary file ထဲ round-trip လုပ်ပြီးနောက် pruned message ပြန်မပေါ်ဘဲ summary၊ retained tail နဲ့ later message ပြန်စီနိုင်သလားဆိုတာပါ။
 
 ```bash
-python3 examples/lewis_session_restore.py
+python3.13 examples/lewis_session_restore.py
 ```
 
 Expected output က:
@@ -99,7 +101,7 @@ message:Fast tool finished first
 message:Focused test still fails
 ```
 
-Code ထဲမှာ `restore_context()` က compaction indexes တွေထဲက နောက်ဆုံးတစ်ခုကိုရွေးပါတယ်။ ပြီးရင် summary ကိုအရင်ထည့်၊ Compaction မတိုင်ခင် entries ထဲမှာ first-kept ID ကိုတွေ့တဲ့နေရာကစပြီး messages ကိုထည့်၊ Compaction နောက် messages ကိုဆက်ထည့်ပါတယ်။ Compaction မရှိတဲ့ test က messages အားလုံး အစီအစဉ်အတိုင်းပြန်ရကြောင်း သီးခြားစစ်ပါတယ်။
+Code ထဲမှာ `restore_context()` က compaction indexes တွေထဲက နောက်ဆုံးတစ်ခုကိုရွေးပါတယ်။ ပြီးရင် summary ကိုအရင်ထည့်၊ Compaction မတိုင်ခင် entries ထဲမှာ first-kept ID ကိုတွေ့တဲ့နေရာကစပြီး messages ကိုထည့်၊ Compaction နောက် messages ကိုဆက်ထည့်ပါတယ်။ Focused tests က Compaction မရှိရင် messages အားလုံးပြန်ရခြင်း၊ anchor မရှိရင် pre-Compaction tail မပြန်ထည့်ခြင်းနဲ့ ပေးထားတဲ့ anchor ရှာမတွေ့ရင် fail ဖြစ်ခြင်းတို့ကို သီးခြားစစ်ပါတယ်။
 
 Lab ရဲ့အကန့်အသတ်ကို မဖျောက်သင့်ပါဘူး။ ဒီ example က `TemporaryDirectory` အတွင်း temporary JSON file တစ်ခုကိုရေးပြီးဖျက်သွားတဲ့ teaching model သာဖြစ်ပါတယ်။ Travis234 ရဲ့ JSONL session entries၊ parent-linked complete session tree/store နဲ့ runtime integration တစ်ခုလုံးကို အစားမထိုးပါဘူး။ Branch ပြောင်းတဲ့ commands၊ file locking နဲ့ process နှစ်ခုကြား coordination၊ interrupted write အတွက် crash recovery တို့ကို မ implement လုပ်ထားပါဘူး။ ဒါကြောင့် output သုံးကြောင်းမှန်ခြင်းကို production persistence အားလုံးမှန်ကြောင်း သက်သေအဖြစ် မယူရပါဘူး။
 

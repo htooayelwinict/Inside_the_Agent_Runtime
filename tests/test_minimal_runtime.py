@@ -128,6 +128,23 @@ class MinimalRuntimeTests(unittest.IsolatedAsyncioTestCase):
                 max_iterations=2,
             )
 
+    async def test_non_positive_parallel_tool_limit_is_rejected(self) -> None:
+        async def model(_messages):
+            return AssistantTurn(text="done", tool_calls=())
+
+        for limit in (0, -1):
+            with self.subTest(limit=limit):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "^max_parallel_tools must be greater than zero$",
+                ):
+                    await run_agent_loop(
+                        model,
+                        {},
+                        "validate configuration",
+                        max_parallel_tools=limit,
+                    )
+
 
 if __name__ == "__main__":
     unittest.main()

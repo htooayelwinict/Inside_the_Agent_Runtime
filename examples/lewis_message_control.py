@@ -25,9 +25,11 @@ def simulate_message_control() -> tuple[str, ...]:
     steering.enqueue("check tests first")
     follow_up.enqueue("run focused test")
 
-    events = ["model:inspect source"]
-    events.extend(f"steering:{message}" for message in steering.drain_one())
-    events.append("turn_end")
+    events = ["model:inspect source", "turn_end"]
+    pending_steering = steering.drain_one()
+    events.extend(f"steering:{message}" for message in pending_steering)
+    if pending_steering:
+        events.extend(("model:continue with steering", "turn_end"))
     events.extend(f"follow_up:{message}" for message in follow_up.drain_one())
     return tuple(events)
 

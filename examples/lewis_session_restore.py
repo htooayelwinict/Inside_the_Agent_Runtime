@@ -43,7 +43,17 @@ def restore_context(entries: tuple[SessionEntry, ...]) -> tuple[str, ...]:
     compaction_index = compaction_indexes[-1]
     compaction = entries[compaction_index]
     restored = [f"summary:{compaction.summary}"]
-    keep = compaction.first_kept_entry_id is None
+    keep = False
+
+    if compaction.first_kept_entry_id is not None:
+        anchor_exists = any(
+            entry.id == compaction.first_kept_entry_id
+            for entry in entries[:compaction_index]
+        )
+        if not anchor_exists:
+            raise ValueError(
+                f"first kept entry not found: {compaction.first_kept_entry_id}"
+            )
 
     for entry in entries[:compaction_index]:
         if entry.id == compaction.first_kept_entry_id:
