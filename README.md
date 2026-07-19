@@ -1,8 +1,8 @@
 # Inside the Agent Runtime (အေးဂျင့်တစ်ခုရဲ့ အတွင်းပိုင်းကို နားလည်ခြင်း)
 
-### AI Agent တစ်ခု ဘယ်လိုစဉ်းစားသလဲ 
-### Pi Loop မှ Hermes Compaction အထိ 
-### Python ဖြင့် Runtime တစ်ခုတည်ဆောက်ခြင်း
+### AI Agent တစ်ခု ဘယ်လိုစဉ်းစားသလဲ
+
+## Pi Loop မှ Hermes Compaction အထိ Python ဖြင့် AI Agent Runtime တစ်ခုကို တည်ဆောက်ခြင်း
 
 ---
 
