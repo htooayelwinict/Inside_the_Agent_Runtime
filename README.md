@@ -67,6 +67,8 @@ Runtime claims တွေကို pinned Pi၊ Hermes Agent နဲ့ Travis234 
 
 Pi, Hermes Agent နဲ့ Travis234 source material တွေဟာ သက်ဆိုင်ရာ MIT license notices အောက်မှာ ရှိပါတယ်။ အသေးစိတ်ကို [Third-Party Notices](THIRD_PARTY_NOTICES.md) မှာဖတ်နိုင်ပါတယ်။ စာမူကို [CC BY-NC-SA 4.0](LICENSE) နဲ့ ဖြန့်ချိထားပါတယ်။
 
+ဒီစာအုပ်ကို ပိုကောင်းလာအောင် ကူညီပေးထားသူတွေနဲ့ accepted community feedback ကို [Contributors / ပါဝင်ကူညီသူများ](CONTRIBUTORS.md) မှာ မှတ်တမ်းတင်ထားပါတယ်။ Contribution လုပ်ချင်ရင် [Contributing Guide](CONTRIBUTING.md) ကို အရင်ဖတ်ပေးပါ။
+
 ## လက်ရှိအခြေအနေ
 
 Chapter 00–16 ပါတဲ့ main sequence ၁၇ ခန်း၊ appendix လေးခု၊ Lewis ရဲ့ case studies နဲ့ offline Runtime workshop တွေကို manuscript checks နဲ့ focused tests ဖြင့် စစ်ထားပါတယ်။ စစ်ဆေးထားတဲ့ boundary နဲ့ မပြေးထားတဲ့ upstream full-suite အကြောင်းကို [Review Report](book/REVIEW_REPORT.md) မှာ ခွဲရေးထားပါတယ်။
