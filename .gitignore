@@ -1,0 +1,9 @@
+.worktrees/
+__pycache__/
+*.py[cod]
+STYLE_GUIDE.md
+tests/
+.gitignore
+REVIEW_REPORT.md
+docs/
+scripts/
