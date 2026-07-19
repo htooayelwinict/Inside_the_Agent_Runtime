@@ -73,4 +73,28 @@ Agent Loop သိပြီးသားဆိုရင် Chapter 04 ရဲ့ se
 
 ---
 
+
+### ဤစာအုပ်အား ရေးသားရာတွင်အသုံးပြုသော အရာများ
+
+`Softwares and Applications :`  
+
+```
+codex cli 
+codex desktop 
+Travis234
+Orca "https://www.onorca.dev"
+Yay app "https://yay.myanmars.app"
+Docker Desktop
+```
+
+
+
+`LLM models :` 
+
+```
+gpt-5.6 sol
+```
+
+---
+
 Next: [Chapter 01 — Pi နဲ့ Hermes ကို ဘာကြောင့် တွဲကြည့်ရတာလဲ](01-why-pi-and-hermes.md)
